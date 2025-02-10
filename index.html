@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Panda Facts</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 900px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #2e3b4e;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      letter-spacing: -0.05em;
+    }
+
+    #showFactsBtn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    #showFactsBtn:hover {
+      background-color: #0056b3;
+    }
+
+    #factsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .fact {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .fact:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .fact-number {
+      font-weight: bold;
+      color: #495057;
+      margin-right: 8px;
+    }
+
+    /* Subtle animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fact {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .fact:nth-child(odd) {
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Amazing Panda Facts</h1>
+    <button id="showFactsBtn">Show Panda Facts!</button>
+    <div id="factsContainer">
+      <!-- Facts will be displayed here -->
+    </div>
+  </div>
+
+  <script>
+    const pandaFacts = [{
+        "fact_number": 1,
+        "fact": "Pandas are native to south-central China."
+      },
+      {
+        "fact_number": 2,
+        "fact": "Giant pandas primarily eat bamboo, consuming up to 40 pounds a day."
+      },
+      {
+        "fact_number": 3,
+        "fact": "They have a pseudo-thumb, which is actually an extended wrist bone that helps them grip bamboo."
+      },
+      {
+        "fact_number": 4,
+        "fact": "Giant pandas are considered a vulnerable species."
+      },
+      {
+        "fact_number": 5,
+        "fact": "A baby panda is about the size of a stick of butter when it is born."
+      },
+      {
+        "fact_number": 6,
+        "fact": "Pandas spend around 12 hours a day eating."
+      },
+      {
+        "fact_number": 7,
+        "fact": "In the wild, pandas live for about 15-20 years."
+      },
+      {
+        "fact_number": 8,
+        "fact": "The scientific name for the giant panda is Ailuropoda melanoleuca, which means 'black and white cat-foot'."
+      },
+      {
+        "fact_number": 9,
+        "fact": "Pandas are excellent climbers and swimmers."
+      },
+      {
+        "fact_number": 10,
+        "fact": "Female pandas are only fertile for a few days each year."
+      }
+    ];
+
+    const showFactsBtn = document.getElementById('showFactsBtn');
+    const factsContainer = document.getElementById('factsContainer');
+
+    // Function to shuffle an array (Fisher-Yates shuffle)
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    showFactsBtn.addEventListener('click', () => {
+      factsContainer.innerHTML = ''; // Clear previous facts
+
+      // Create a copy of the array to avoid modifying the original
+      const shuffledFacts = [...pandaFacts];
+      shuffleArray(shuffledFacts);
+
+      shuffledFacts.forEach(fact => {
+        const factDiv = document.createElement('div');
+        factDiv.classList.add('fact');
+        factDiv.innerHTML = `<span class="fact-number">${fact.fact_number}.</span> ${fact.fact}`;
+        factsContainer.appendChild(factDiv);
+      });
+    });
+  </script>
+</body>
+
+</html>
